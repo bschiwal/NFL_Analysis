@@ -26,14 +26,14 @@ passEPAtrailend <- passtrailingend%>%
   inner_join(colr,by = c("posteam"= "team_abbr"))
 
 ###Create Chart
-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
+qbclutch<-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   geom_point(color=passEPAtrailend$team_color, 
              cex=passEPAtrailend$attempts/15)+ 
   geom_text_repel(aes(label=passer_player_name),force=2)+
   labs(x= "Completion % Over Expectation (CPOE)", 
        y= "QB EPA per Pass Thrown", 
        title="Quarterback Clutch Efficency 2019-2020", 
-       subtitle ="Dropback Passes in Final Two Minutes of Half When Trailing by < 8 Points", 
+       subtitle ="Dropback Passes in Final Two Minutes of Half When Trailing by < 8 Points; Min 60 Attempt", 
        caption="Made by @bschiwal; Data from @nflfastR")+
   geom_hline(yintercept=0,color="red",linetype="dashed")+
   geom_vline(xintercept=0,color="red",linetype="dashed")+
@@ -41,8 +41,9 @@ ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   theme(plot.title=element_text(size=14,hjust=.5,face="bold"),
         plot.subtitle = element_text(size=10,hjust=.5))+
   stat_smooth(geom="line",method="lm", alpha=.75)
-
+qbclutch
 
 ###Save image
-png("qbClutchEff.png")
+dev.copy(png,"qbClutchEff.png")
+##qbclutch
 dev.off()
