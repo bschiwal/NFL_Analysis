@@ -29,16 +29,16 @@ pass<-  pbp%>%
 
 
 ###Create Chart
-rushplot<-ggplot(rush, aes(avgEPA, playcnt))+
+rushplot<-ggplot(rush, aes(avgEPA, pctSuccess))+
   geom_point(color=rush$team_color, 
-             cex=rush$pctSuccess*10)+ 
+             cex=rush$playcnt/2)+ 
   geom_text_repel(aes(label=posteam),force=2)+
-  labs(x= "Average Yards Gained per Play", 
-       y= "Run Plays Called", 
+  labs(x= "Average EPA Per Play", 
+       y= "Percent of Success", 
        title="Rush on Late Down and Long", 
        subtitle ="Running plays on 2nd and 3rd down and long", 
        caption="Made by @bschiwal; Data from @nflfastR")+
-  geom_hline(yintercept=mean(rush$playcnt),color="red",linetype="dashed")+
+  geom_hline(yintercept=mean(rush$pctSuccess),color="red",linetype="dashed")+
   geom_vline(xintercept=(mean(rush$avgEPA)),color="red",linetype="dashed")+
   theme_bw()+
   theme(plot.title=element_text(size=14,hjust=.5,face="bold"),
@@ -46,16 +46,16 @@ rushplot<-ggplot(rush, aes(avgEPA, playcnt))+
   stat_smooth(geom="line",method="lm", alpha=.75)
 rushplot
 
-passplot<-ggplot(pass, aes(avgEPA, playcnt))+
+passplot<-ggplot(pass, aes(avgEPA, pctSuccess))+
   geom_point(color=pass$team_color, 
-             cex=pass$pctSuccess*10)+ 
+             cex=pass$playcnt/10)+ 
   geom_text_repel(aes(label=posteam),force=2)+
-  labs(x= "Average Yards Gained per Play", 
-       y= "Run Plays Called", 
-       title="Rush on Late Down and Long", 
-       subtitle ="Running plays on 2nd and 3rd down and long", 
+  labs(x= "Average EPA per Play", 
+       y= "Percent Success", 
+       title="Pass on Late Down and Long", 
+       subtitle ="Passing plays on 2nd and 3rd down and long", 
        caption="Made by @bschiwal; Data from @nflfastR")+
-  geom_hline(yintercept=mean(pass$playcnt),color="red",linetype="dashed")+
+  geom_hline(yintercept=mean(pass$pctSuccess),color="red",linetype="dashed")+
   geom_vline(xintercept=(mean(pass$avgEPA)),color="red",linetype="dashed")+
   theme_bw()+
   theme(plot.title=element_text(size=14,hjust=.5,face="bold"),

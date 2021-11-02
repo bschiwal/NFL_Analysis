@@ -10,8 +10,11 @@ seasons<- 2019:2020
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color)
 
+###Load PBP for 2021
+pbp21<- nflfastR::load_pbp(2021)
+
 ##Filter to just dropback pass plays
-pass <-pbp%>% filter(qb_dropback==1,play_type=="pass")
+pass <-pbp21%>% filter(qb_dropback==1,play_type=="pass")
 
 
 passEPA <- pass%>% 
@@ -20,21 +23,21 @@ passEPA <- pass%>%
   summarize(qb_epa_per_play=mean(qb_epa, na.rm = TRUE),attempts=sum(pass_attempt))%>%
   filter(attempts>=200)
 
-passmain <-pbp%>% filter(qb_dropback==1,play_type=="pass",down<=3,half_seconds_remaining>=120)
+passmain <-pbp21%>% filter(qb_dropback==1,play_type=="pass",down<=3,half_seconds_remaining>=120)
 passEPAMain <- passmain%>% 
   select(posteam,passer_player_name,qb_epa,pass_attempt)%>%
   group_by(passer_player_name)%>%
   summarize(qb_epa_per_play=mean(qb_epa, na.rm = TRUE),attempts=sum(pass_attempt))%>%
   filter(attempts>=200)
 
-passtrailingend <-pbp%>% filter(qb_dropback==1,
+passtrailingend <-pbp21%>% filter(qb_dropback==1,
                                 play_type=="pass",
                                 score_differential<=0,
                                 score_differential>=-8,
                                 half_seconds_remaining<=120)
 
 
-pte20 <-pbp%>% filter(qb_dropback==1,
+pte20 <-pbp21%>% filter(qb_dropback==1,
                play_type=="pass",
                score_differential<=0,
                score_differential>=-8,
