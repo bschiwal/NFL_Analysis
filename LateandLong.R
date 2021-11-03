@@ -6,7 +6,7 @@ library(ggplot2)
 library(ggrepel)
 
 ###Load play by play data
-seasons<- 2019:2020
+seasons<- 2021
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color)
 
@@ -26,7 +26,7 @@ pass<-  pbp%>%
   group_by(posteam)%>%
   summarise(avgYards=mean(yards_gained,na.rm=TRUE),avgEPA=mean(epa),pctSuccess=mean(success),playcnt=(sum(play)))%>%
   inner_join(colr,by = c("posteam"= "team_abbr"))
-
+rm(colr,pbp,seasons)
 
 ###Create Chart
 rushplot<-ggplot(rush, aes(avgEPA, pctSuccess))+
@@ -46,6 +46,7 @@ rushplot<-ggplot(rush, aes(avgEPA, pctSuccess))+
   stat_smooth(geom="line",method="lm", alpha=.75)
 rushplot
 
+
 passplot<-ggplot(pass, aes(avgEPA, pctSuccess))+
   geom_point(color=pass$team_color, 
              cex=pass$playcnt/10)+ 
@@ -62,3 +63,4 @@ passplot<-ggplot(pass, aes(avgEPA, pctSuccess))+
         plot.subtitle = element_text(size=10,hjust=.5))+
   stat_smooth(geom="line",method="lm", alpha=.75)
 passplot
+rm(rushplot,passplot)

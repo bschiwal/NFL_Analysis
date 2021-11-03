@@ -24,7 +24,7 @@ passEPAtrailend <- passtrailingend%>%
   summarize(qb_epa_per_play=mean(qb_epa, na.rm = TRUE),attempts=sum(pass_attempt),cpoe=mean(cpoe,na.rm=TRUE))%>%
   filter(attempts>=15)%>%
   inner_join(colr,by = c("posteam"= "team_abbr"))
-
+rm(colr,passtrailingend,pbp,seasons)
 ###Create Chart
 qbclutch<-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   geom_point(color=passEPAtrailend$team_color, 
@@ -39,7 +39,7 @@ qbclutch<-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   geom_vline(xintercept=0,color="red",linetype="dashed")+
   theme_bw()+
   theme(plot.title=element_text(size=14,hjust=.5,face="bold"),
-        plot.subtitle = element_text(size=10,hjust=.5))+
+        plot.subtitle = element_text(size=8,hjust=.5))+
   stat_smooth(geom="line",method="lm", alpha=.75)
 qbclutch
 
@@ -47,3 +47,4 @@ qbclutch
 dev.copy(png,"qbClutchEff.png")
 ##qbclutch
 dev.off()
+rm(qbclutch)
