@@ -12,22 +12,16 @@ install.packages("nflfastR")
 ```
 
 ## Code Examples
-<<<<<<< HEAD
+
 ### Quarterback Clutch Efficiency
-=======
-###Quarterback Clutch Efficiency
->>>>>>> 9961b7d480c857934d77deb5150639269efbe589
 
 This code was used to show how efficient QB's were in clutch situations. It only looked at passing plays in the last two minutes of either half when down by one score: 
 `qb_dropback==1,play_type=="pass",score_differential<=0,score_differential>=-8, half_seconds_remaining<=120 | game_half=="Overtime"`
 
 ![QB Clutch Efficency](./qbClutchEff.png)
 
-<<<<<<< HEAD
+
 ### Team Record Analysis
-=======
-###Team Record Analysis
->>>>>>> 9961b7d480c857934d77deb5150639269efbe589
 
 This data set is a bit more complex to build as it requires a few iterative steps joined back to the teams to make the necessary calculations.  The intermediate data sets that are built are:
 *Individual Team Record
@@ -37,11 +31,9 @@ This data set is a bit more complex to build as it requires a few iterative step
 
 Using this data frame I then plot charts that take the data a bit further. 
 
-<<<<<<< HEAD
+
 #### Record Readjustment
-=======
-####Record Readjustment
->>>>>>> 9961b7d480c857934d77deb5150639269efbe589
+
 First, I readjust the records of the teams using the cumulative record for all opponents. 
 ```
 ggplot
@@ -52,11 +44,8 @@ ggplot
 ```
 ![Strength Adjusted Team Records](./RecordStrengthAdj.png)
 
-<<<<<<< HEAD
 #### Strong Wins and Weak Losses
-=======
-####Strong Wins and Weak Losses
->>>>>>> 9961b7d480c857934d77deb5150639269efbe589
+
 Next, I plot the Strong wins and Weak Losses of each team by looking at just wins against winning teams and losses against losing teams. 
 
 ```
