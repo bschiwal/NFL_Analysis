@@ -16,7 +16,10 @@ install.packages("nflfastR")
 ### Quarterback Clutch Efficiency
 
 This code was used to show how efficient QB's were in clutch situations. It only looked at passing plays in the last two minutes of either half when down by one score: 
-`qb_dropback==1,play_type=="pass",score_differential<=0,score_differential>=-8, half_seconds_remaining<=120 | game_half=="Overtime"`
+`qb_dropback==1,play_type=="pass",`
+`score_differential<=0,`
+`score_differential>=-8,`
+`half_seconds_remaining<=120 | game_half=="Overtime"`
 
 ![QB Clutch Efficency](./qbClutchEff.png)
 
