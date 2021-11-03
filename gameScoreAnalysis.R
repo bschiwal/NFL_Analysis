@@ -5,6 +5,7 @@ library(ggrepel)
 library(ggimage)
 library(scales)
 
+
 ###Load Game data
 seasons<- 2021
 game<- nflfastR::fast_scraper_schedules(seasons)
@@ -127,7 +128,7 @@ teamrecords<-record%>%
   left_join(cumrecopp, by = "team")%>%
   left_join(colr, by = c("team"="team_abbr"))
 
-rm(gmplayed,opprecord,record,result,colr,recvswin, opprecord)
+rm(gmplayed,opprecord,record,result,colr,recvswin,cumrecopp)
 
 #Plot a few charts
 ##Strength Adjusted Record
@@ -163,7 +164,5 @@ ggplot(teamrecords, aes(losses_vs_not_winning_team*(1-record),wins_vs_winning_te
 dev.copy(png,"WinsStrengthAdj.png")
 dev.off() 
 
-ggplot(teamrecords, aes(opp_cum_rec,opp_cum_rec_win))+
-  geom_image(aes(image=team_logo_espn), size = .1)
 
   
