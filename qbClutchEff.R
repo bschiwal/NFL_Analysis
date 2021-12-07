@@ -47,4 +47,5 @@ qbclutch
 dev.copy(png,"qbClutchEff.png")
 ##qbclutch
 dev.off()
-rm(qbclutch)
+rm(qbclutch,passEPAtrailend)
+

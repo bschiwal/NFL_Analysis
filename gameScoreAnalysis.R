@@ -164,5 +164,5 @@ ggplot(teamrecords, aes(losses_vs_not_winning_team*(1-record),wins_vs_winning_te
 dev.copy(png,"WinsStrengthAdj.png")
 dev.off() 
 
-
+rm(teamrecords)
   

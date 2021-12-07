@@ -31,7 +31,7 @@ rm(colr,pbp,seasons)
 ###Create Chart
 rushplot<-ggplot(rush, aes(avgEPA, pctSuccess))+
   geom_point(color=rush$team_color, 
-             cex=rush$playcnt/2)+ 
+             cex=rush$playcnt/4)+ 
   geom_text_repel(aes(label=posteam),force=2)+
   labs(x= "Average EPA Per Play", 
        y= "Percent of Success", 
