@@ -67,5 +67,5 @@ There is a lot of criticism of teams running the ball on 2nd and 10 or longer.  
 
 To look deeper at this I also wanted to show just rushing and passing situations and compare the series success with the 2nd down play success. To do this I segmented the data into two charts, one for passing and one for rushing plays. 
 
-![Rushing Success on 2nd and Long](./SuccessRush2ndLong.png)
-![Passing Success on 2nd and Long](./SuccessPass2ndLong.png)
+![Rushing Success on 2nd and Long](./SuccessRush2ndlong.png)
+![Passing Success on 2nd and Long](./SuccessPass2ndlong.png)
