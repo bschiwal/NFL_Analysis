@@ -18,6 +18,7 @@ plays<- pbp %>%
   filter(play==1,play_type=="run" | play_type=="pass")%>%
   mutate(td_differential=ceiling(score_differential/8))
 
+##Join Team Color Data
 plays<-plays%>%
   select(posteam,play_type,play,pass,rush, epa, posteam_score,defteam_score,td_differential)%>%
   inner_join(colr,by = c("posteam"= "team_abbr"))
@@ -28,20 +29,9 @@ teamdata<-plays%>%
             avgpass = mean(pass),
             avgepa = mean(epa),
             play_count = sum(play))
+rm(colr,seasons,pbp)
 
-
-
-ggplot(teamdata,aes(y=avgrush,x=td_differential))+
-  geom_point(data = subset(teamdata,posteam!="MIN"))+
-  geom_line(data = subset(teamdata,posteam=="MIN"), color="#4f2683",size=1)+
-  scale_x_continuous(breaks =c(-4,-3,-2,-1,0,1,2,3,4))+
-  scale_y_continuous(labels = scales::percent)+
-  labs(x= "Touchdown Differential",
-       y = "Rushing Percentage",
-       caption = "Made by @BSchiwal | Data from @NFLfastR",
-       title = "Minnesota Rushing Play Calls vs Rest of League")
-
-### League Average
+### get Minnesota plays
 mn<-teamdata%>%
   filter(posteam=="MIN",
          play_count>10,
@@ -49,27 +39,6 @@ mn<-teamdata%>%
          td_differential>=(-3))%>%
   select(!play_count)
 
-leagueavg<-plays%>%
-  group_by(td_differential)%>%
-  summarize(avgrush = (mean(rush)),
-            avgpass = mean(pass),
-            avgepa = mean(epa),
-            posteam = "AVG",
-            team_color = "black",
-            play_count = sum(play))%>%
-  filter(play_count>=50)%>%
-  select(posteam,td_differential,team_color,avgrush,avgpass,avgepa)%>%
-  union(mn)
-
-ggplot(leagueavg,aes(y=avgrush,x=td_differential))+
-  geom_line(data = subset(leagueavg,posteam!="MIN"))+
-  geom_point(data = subset(leagueavg,posteam=="MIN"), color="#4f2683",size=1)+
-  scale_x_continuous(breaks =c(-4,-3,-2,-1,0,1,2,3,4))+
-  scale_y_continuous(labels = scales::percent)+
-  labs(x= "Touchdown Differential",
-       y = "Rushing Percentage",
-       caption = "Made by @BSchiwal | Data from @NFLfastR",
-       title = "Minnesota Rushing Play Calls vs Rest of League")
 
 ###Top EPA Teams
 topepa<-plays%>%
@@ -81,21 +50,7 @@ topepa<- arrange(topepa,desc(avgepa))%>%
   filter(row_number()<=10 | posteam=="MIN")%>%
   select(posteam)
 
-topteamdata <- topepa%>%
-  left_join(teamdata,by = c("posteam"))
-
-ggplot(topteamdata,aes(y=avgrush,x=td_differential))+
-  geom_point(data = subset(topteamdata,posteam!="MIN"))+
-  geom_line(data = subset(topteamdata,posteam=="MIN"), color="#4f2683",size=1)+
-  scale_x_continuous(breaks =c(-4,-3,-2,-1,0,1,2,3,4))+
-  scale_y_continuous(labels = scales::percent)+
-  labs(x= "Touchdown Differential",
-       y = "Rushing Percentage",
-       caption = "Made by @BSchiwal | Data from @NFLfastR",
-       title = "Minnesota Rushing Play Calls vs Rest of League")
-
-
-
+###Average of top 10 EPA teams
 leaguetopavg<-plays%>%
   right_join(topepa, by = c("posteam"="posteam"))%>%
   filter(posteam!="MIN")%>%
@@ -133,5 +88,6 @@ ggplot(leaguetopavg,aes(y=avgrush,x=td_differential))+
 ###Save image
 dev.copy(png,"MNRushvstopoff.png")
 dev.off()
-  
+
+rm(plays,mn,teamdata,topepa,leaguetopavg)  
   

@@ -49,7 +49,7 @@ rushpass<-pass%>%
 
 successplot<-ggplot(rushpass, aes(y=pctSeriesSuccess.pass, x=pctSeriesSuccess.rush))+
   geom_image(aes(image=team_logo_espn), size = .1)+ 
-  # geom_text_repel(aes(label=posteam),force=2)+
+   geom_text_repel(aes(label=posteam),force=2)+
   labs(x= "Rushing Success", 
        y= "Passing Success", 
        title="Percent of Series Success After 2nd Down and 10 or More", 
