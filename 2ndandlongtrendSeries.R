@@ -4,6 +4,7 @@ library(nflfastR)
 library(tidyverse)
 library(ggplot2)
 library(ggrepel)
+library(ggimage)
 
 ###Load play by play data
 seasons<- 2021
@@ -47,9 +48,11 @@ rushpass<-pass%>%
   )
 ##Make some Charts
 
+##Series Success Rushing vs Passing on 2nd Down and Long
+
 successplot<-ggplot(rushpass, aes(y=pctSeriesSuccess.pass, x=pctSeriesSuccess.rush))+
   geom_image(aes(image=team_logo_espn), size = .1)+ 
-   geom_text_repel(aes(label=posteam),force=2)+
+  #geom_text_repel(aes(label=posteam),force=2)+
   labs(x= "Rushing Success", 
        y= "Passing Success", 
        title="Percent of Series Success After 2nd Down and 10 or More", 
@@ -63,6 +66,12 @@ successplot<-ggplot(rushpass, aes(y=pctSeriesSuccess.pass, x=pctSeriesSuccess.ru
   stat_smooth(geom="line",method="lm", alpha=.75)
 successplot
 
+###Save image
+dev.copy(png,"SeriesSuccess2ndLong.png")
+##qbclutch
+dev.off()
+
+## Rushing Success on 2nd and long, Play success vs Series Success. 
 
 successrush<-ggplot(rushpass, aes(y=pctSuccess.rush, x=pctSeriesSuccess.rush))+
   geom_image(aes(image=team_logo_espn), size = .1)+ 
@@ -72,11 +81,41 @@ successrush<-ggplot(rushpass, aes(y=pctSuccess.rush, x=pctSeriesSuccess.rush))+
        title="Percent of Series Success After 2nd Down and 10 or More", 
        subtitle ="Success = First Down or Touchdown", 
        caption="Made by @bschiwal; Data from @nflfastR")+
-  geom_hline(yintercept=mean(rushpass$pctSuccess.pass),color="red",linetype="dashed")+
+  geom_hline(yintercept=mean(rushpass$pctSuccess.rush),color="red",linetype="dashed")+
   geom_vline(xintercept=(mean(rushpass$pctSeriesSuccess.rush)),color="red",linetype="dashed")+
   theme_bw()+
   theme(plot.title=element_text(size=14,hjust=.5,face="bold"),
         plot.subtitle = element_text(size=10,hjust=.5))+
   stat_smooth(geom="line",method="lm", alpha=.75)
 successrush
+
+###Save image
+dev.copy(png,"SuccessRush2ndlong.png")
+##qbclutch
+dev.off()
+
+## Passing Success on 2nd and long, Play success vs Series Success. 
+successpass<-ggplot(rushpass, aes(y=pctSuccess.pass, x=pctSeriesSuccess.pass))+
+  geom_image(aes(image=team_logo_espn), size = .1)+ 
+  # geom_text_repel(aes(label=posteam),force=2)+
+  labs(x= "Passing Series Success", 
+       y= "2nd Down Passing Success", 
+       title="Percent of Series Success After 2nd Down and 10 or More", 
+       subtitle ="Success = First Down or Touchdown", 
+       caption="Made by @bschiwal; Data from @nflfastR")+
+  geom_hline(yintercept=mean(rushpass$pctSuccess.pass),color="red",linetype="dashed")+
+  geom_vline(xintercept=(mean(rushpass$pctSeriesSuccess.pass)),color="red",linetype="dashed")+
+  theme_bw()+
+  theme(plot.title=element_text(size=14,hjust=.5,face="bold"),
+        plot.subtitle = element_text(size=10,hjust=.5))+
+  stat_smooth(geom="line",method="lm", alpha=.75)
+successpass
+
+###Save image
+dev.copy(png,"SuccessPass2ndlong.png")
+##qbclutch
+dev.off()
+
+rm(pass,rush,rushpass,successplot,successrush, successpass)
+
 

@@ -63,7 +63,7 @@ passplot<-ggplot(pass, aes(avgEPA, pctSuccess))+
   labs(x= "Average EPA per Play", 
        y= "Percent Success", 
        title="Pass on Late Down and Long", 
-       subtitle ="Passing plays on 2nd and 3rd down and long", 
+       subtitle ="Passing plays on 2nd and long", 
        caption="Made by @bschiwal; Data from @nflfastR")+
   geom_hline(yintercept=mean(pass$pctSuccess),color="red",linetype="dashed")+
   geom_vline(xintercept=(mean(pass$avgEPA)),color="red",linetype="dashed")+

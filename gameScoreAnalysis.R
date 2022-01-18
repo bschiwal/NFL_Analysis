@@ -136,12 +136,14 @@ rm(gmplayed,opprecord,record,result,colr,recvswin,cumrecopp)
 ggplot(teamrecords, aes((opp_cum_rec_lose/opp_cum_rec)*(1-record),(opp_cum_rec_win/opp_cum_rec)*record))+
   geom_image(aes(image=team_logo_espn), size = .1)+
   labs(title="Strength Adjusted Wins and Losses",
+       subtitle = "2021 Season",
        x = "Losing Percentage",
        y = "Winning Percentage",
        caption = "Wins and Losses Adjusted by The Cumulative Record of Opponents in Wins and Losses
                   Made by @bschiwal | source @nflfastR"
   )+  theme(plot.title=element_text(hjust=.5,family="serif",face="bold", size=14),
-            plot.caption = element_text(family="serif", size=8,colour="black"))+
+            plot.caption = element_text(family="serif", size=8,colour="black"),
+            plot.subtitle=element_text(hjust=.5,family="serif", size=12))+
   scale_y_continuous(breaks=seq(0,1,.250),labels = label_number(accuracy=.001))+
   scale_x_reverse(breaks=seq(0,1,.250),labels=label_number(accuracy=.001))
 ###Save image
@@ -152,13 +154,15 @@ dev.off()
 ggplot(teamrecords, aes(losses_vs_not_winning_team*(1-record),wins_vs_winning_team*record))+
   geom_image(aes(image=team_logo_espn), size = .1)+
   labs(title="Strength Adjusted Wins and Losses",
+       subtitle= "2021 Season",
        x = "Weak Losses",
        y = "Strong Wins",
        caption = "Strong Wins = (Team Record * Wins vs Teams With Winning Record) | Weak Losses = ((1-Team Record) * Losses vs Teams Without Winning Record)
                   Made by @bschiwal | source @nflfastR"
        )+
   theme(plot.title=element_text(hjust=.5,family="serif",face="bold", size=14),
-        plot.caption = element_text(family="serif", size=8,colour="black"))+
+        plot.caption = element_text(family="serif", size=8,colour="black"),
+        plot.subtitle=element_text(hjust=.5,family="serif", size=12))+
   scale_x_reverse()
 
 dev.copy(png,"WinsStrengthAdj.png")

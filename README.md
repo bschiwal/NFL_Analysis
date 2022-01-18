@@ -58,3 +58,14 @@ ggplot(
   wins_vs_winning_team*record))
 ```
 ![Strong Wins vs Weak Losses](./WinsStrengthAdj.png)
+
+#### How Do Teams Handle 2nd and Long Situations
+
+There is a lot of criticism of teams running the ball on 2nd and 10 or longer.  I also want to take a look at these 2nd down situations and determine how successful a team is. The fist chart shows the success rate of a series when there is a 2nd and long situation. Success being when the team either scores a touchdown or gets a first down.
+
+![Series Success on 2nd and Long](./SeriesSuccess2ndLong.png)
+
+To look deeper at this I also wanted to show just rushing and passing situations and compare the series success with the 2nd down play success. To do this I segmented the data into two charts, one for passing and one for rushing plays. 
+
+![Rushing Success on 2nd and Long](./SuccessRush2ndLong.png)
+![Passing Success on 2nd and Long](./SuccessPass2ndLong.png)

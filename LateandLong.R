@@ -63,4 +63,4 @@ passplot<-ggplot(pass, aes(avgEPA, pctSuccess))+
         plot.subtitle = element_text(size=10,hjust=.5))+
   stat_smooth(geom="line",method="lm", alpha=.75)
 passplot
-rm(rushplot,passplot)
+rm(rushplot,passplot,rush,pass)
