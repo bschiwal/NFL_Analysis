@@ -143,8 +143,8 @@ successplot
 
 tendancyplot<-ggplot(rushpass, aes(pctplay.rush, pctplay.pass))+
   geom_point(color=rushpass$team_color, 
-             cex=rushpass$totalplays/10)+ 
-  geom_text_repel(aes(label=posteam),force=2)+
+             cex=rushpass$totalplays/50)+ 
+  geom_text_repel(aes(label=posteam),force=10)+
   labs(x= "Rushing Plays", 
        y= "Passing Plays", 
        title="Play Tendancy on 2nd Down and Long", 

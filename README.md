@@ -69,3 +69,7 @@ To look deeper at this I also wanted to show just rushing and passing situations
 
 ![Rushing Success on 2nd and Long](./SuccessRush2ndlong.png)
 ![Passing Success on 2nd and Long](./SuccessPass2ndlong.png)
+
+Another chart I have developed is one that attempts to look at how the Minnesota Vikings operate their offense in different situations. This chart shows how frequently the Vikings run the ball depending on the point differential is at the time in the game compared to the top 10 offenses in the league (Those with the highest Expected Points Added per Play). Point differential is calculated for this purpose as 8 available points per drive. There is a perception that the Vikings run the ball too frequently, an this is shown in the data. The Vikings tend to run the ball at a higher rate than top offenses, except for situations where they are down by two or more scores.
+
+![MN Rushing Percentage vs Top Offenses](./MNRushvstopoff.png)
