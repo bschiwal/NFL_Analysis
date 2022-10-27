@@ -149,7 +149,7 @@ ggplot(teamrecords, aes((opp_cum_rec_lose/opp_cum_rec)*(1-record),(opp_cum_rec_w
   scale_y_continuous(breaks=seq(0,1,.250),labels = label_number(accuracy=.001))+
   scale_x_reverse(breaks=seq(0,1,.250),labels=label_number(accuracy=.001))
 ###Save image
-dev.copy(png,"RecordStrengthAdj.png")
+dev.copy(png,"RecordStrengthAdj.png", width = 600, height = 600)
 dev.off()  
 
 ##Strength Adjusted Wins
@@ -167,7 +167,7 @@ ggplot(teamrecords, aes(losses_vs_not_winning_team*(1-record),wins_vs_winning_te
         plot.subtitle=element_text(hjust=.5,family="serif", size=12))+
   scale_x_reverse()
 
-dev.copy(png,"WinsStrengthAdj.png")
+dev.copy(png,"WinsStrengthAdj.png", width = 600, height = 600)
 dev.off() 
 
 rm(teamrecords)
