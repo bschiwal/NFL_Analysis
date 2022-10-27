@@ -7,7 +7,9 @@ library(ggrepel)
 
 ###Load play by play data
 seasons<- 2021
-pbp<- nflfastR::load_pbp(seasons)
+pbp<- read.csv("pbp_history.csv")
+
+
 colr<-teams_colors_logos%>% select(team_abbr,team_color, team_color2,team_logo_espn)
 
 offense<-pbp%>%

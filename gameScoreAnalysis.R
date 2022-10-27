@@ -1,21 +1,23 @@
 library(nflfastR)
+library(nflreadr)
 library(tidyverse)
 library(ggplot2)
 library(ggrepel)
 library(ggimage)
 library(scales)
-
+library(dplyr)
 
 ###Load Game data
-seasons<- 2021
-game<- nflfastR::fast_scraper_schedules(seasons)
+seasons<- 2022
+game<- nflreadr::load_schedules(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color,team_logo_espn)
 
 ###Build Team Record Dataset
 #load games
 gmplayed<- game%>%
-  select(game_id,game_type,home_team,away_team,home_score,away_score,home_result)%>%
-  filter(!is.na(away_score))
+  select(game_id,game_type,home_team,away_team,home_score,away_score,result)%>%
+  filter(!is.na(away_score))%>%
+  rename("home_result"="result")
 
 #distinct team list
 teams<-game%>%distinct(home_team)
@@ -98,8 +100,8 @@ cumrecopp<-result%>%
     group_by(team)%>%
     summarise(opp_cum_rec = sum(record),
       opp_cum_rec_home = sum(record_home),
-      opp_cum_rec_win = sum(record_home[win==1]),
-      opp_cum_rec_lose = sum(record_home[loss==1]),
+      opp_cum_rec_win = sum(record[win==1]),
+      opp_cum_rec_lose = sum(record[loss==1]),
       opp_cum_rec_away = sum(record_away)
     )
 ##Record Vs Winning Teams vs losing teams(.500 with losing)
@@ -136,7 +138,7 @@ rm(gmplayed,opprecord,record,result,colr,recvswin,cumrecopp)
 ggplot(teamrecords, aes((opp_cum_rec_lose/opp_cum_rec)*(1-record),(opp_cum_rec_win/opp_cum_rec)*record))+
   geom_image(aes(image=team_logo_espn), size = .1)+
   labs(title="Strength Adjusted Wins and Losses",
-       subtitle = "2021 Season",
+       subtitle = "2022 Season",
        x = "Losing Percentage",
        y = "Winning Percentage",
        caption = "Wins and Losses Adjusted by The Cumulative Record of Opponents in Wins and Losses
@@ -154,7 +156,7 @@ dev.off()
 ggplot(teamrecords, aes(losses_vs_not_winning_team*(1-record),wins_vs_winning_team*record))+
   geom_image(aes(image=team_logo_espn), size = .1)+
   labs(title="Strength Adjusted Wins and Losses",
-       subtitle= "2021 Season",
+       subtitle= "2022 Season",
        x = "Weak Losses",
        y = "Strong Wins",
        caption = "Strong Wins = (Team Record * Wins vs Teams With Winning Record) | Weak Losses = ((1-Team Record) * Losses vs Teams Without Winning Record)

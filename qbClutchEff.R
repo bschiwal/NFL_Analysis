@@ -6,7 +6,7 @@ library(ggplot2)
 library(ggrepel)
 
 ###Load play by play data
-seasons<- 2021
+seasons<- 2022
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color)
 
@@ -22,13 +22,13 @@ passEPAtrailend <- passtrailingend%>%
   select(posteam,posteam,passer_player_name,qb_epa,pass_attempt,cpoe)%>%
   group_by(passer_player_name,posteam)%>%
   summarize(qb_epa_per_play=mean(qb_epa, na.rm = TRUE),attempts=sum(pass_attempt),cpoe=mean(cpoe,na.rm=TRUE))%>%
-  filter(attempts>=15)%>%
+  filter(attempts>=10)%>%
   inner_join(colr,by = c("posteam"= "team_abbr"))
 rm(colr,passtrailingend,pbp,seasons)
 ###Create Chart
 qbclutch<-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   geom_point(color=passEPAtrailend$team_color, 
-             cex=passEPAtrailend$attempts/15)+ 
+             cex=passEPAtrailend$attempts/5)+ 
   geom_text_repel(aes(label=passer_player_name),force=2)+
   labs(x= "Completion % Over Expectation (CPOE)", 
        y= "QB EPA per Pass Thrown", 
