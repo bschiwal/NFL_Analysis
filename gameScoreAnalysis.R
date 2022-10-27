@@ -171,4 +171,4 @@ dev.copy(png,"WinsStrengthAdj.png")
 dev.off() 
 
 rm(teamrecords)
-  
+ 
