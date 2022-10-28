@@ -32,7 +32,7 @@ qbclutch<-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   geom_text_repel(aes(label=passer_player_name),force=2)+
   labs(x= "Completion % Over Expectation (CPOE)", 
        y= "QB EPA per Pass Thrown", 
-       title="Quarterback Clutch Efficency 2021", 
+       title="Quarterback Clutch Efficency 2022", 
        subtitle ="Dropback Passes in Final Two Minutes of Half or Overtime When Trailing by < 8 Points; Min 15 Attempt", 
        caption="Made by @bschiwal; Data from @nflfastR")+
   geom_hline(yintercept=0,color="red",linetype="dashed")+

@@ -7,7 +7,7 @@ library(ggrepel)
 library(ggimage)
 
 ###Load play by play data
-seasons<- 2021
+seasons<- 2022
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color,team_logo_espn)
 
@@ -64,6 +64,7 @@ successplot<-ggplot(rushpass, aes(y=pctSeriesSuccess.pass, x=pctSeriesSuccess.ru
   theme(plot.title=element_text(size=14,hjust=.5,face="bold"),
         plot.subtitle = element_text(size=10,hjust=.5))+
   stat_smooth(geom="line",method="lm", alpha=.75)
+
 successplot
 
 ###Save image

@@ -6,7 +6,7 @@ library(ggplot2)
 library(ggrepel)
 
 ###Load play by play data
-seasons<- 2021
+seasons<- 2022
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color)
 
@@ -130,7 +130,7 @@ successplot<-ggplot(rushpass, aes(pctSuccess.rush, pctSuccess.pass))+
   geom_text_repel(aes(label=posteam),force=2)+
   labs(x= "Rushing Success", 
        y= "Passing Success", 
-       title="Pass on 2nd Down and Long", 
+       title="Success on 2nd Down and Long", 
        subtitle ="10 yards or more to go", 
        caption="Made by @bschiwal; Data from @nflfastR")+
   geom_hline(yintercept=mean(rushpass$pctSuccess.pass),color="red",linetype="dashed")+

@@ -9,7 +9,7 @@ library(ggplot2)
 library(ggrepel)
 
 ###Load play by play data
-seasons<- 2021
+seasons<- 2022
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color)
 
