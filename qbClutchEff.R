@@ -6,7 +6,7 @@ library(ggplot2)
 library(ggrepel)
 
 ###Load play by play data
-seasons<- 2022
+seasons<- 2023
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color)
 
@@ -32,7 +32,7 @@ qbclutch<-ggplot(passEPAtrailend, aes(cpoe, qb_epa_per_play))+
   geom_text_repel(aes(label=passer_player_name),force=2)+
   labs(x= "Completion % Over Expectation (CPOE)", 
        y= "QB EPA per Pass Thrown", 
-       title="Quarterback Clutch Efficency 2022", 
+       title="Quarterback Clutch Efficency 2023", 
        subtitle ="Dropback Passes in Final Two Minutes of Half or Overtime When Trailing by < 8 Points; Min 15 Attempt", 
        caption="Made by @bschiwal; Data from @nflfastR")+
   geom_hline(yintercept=0,color="red",linetype="dashed")+

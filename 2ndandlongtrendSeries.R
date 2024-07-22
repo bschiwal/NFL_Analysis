@@ -7,7 +7,7 @@ library(ggrepel)
 library(ggimage)
 
 ###Load play by play data
-seasons<- 2022
+seasons<- 2023
 pbp<- nflfastR::load_pbp(seasons)
 colr<-teams_colors_logos%>% select(team_abbr,team_color,team_logo_espn)
 

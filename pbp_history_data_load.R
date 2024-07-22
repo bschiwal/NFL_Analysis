@@ -3,8 +3,8 @@ library(dplyr)
 library(nflfastR)
 
 ### Set Season Data to separate historical PBP from current season data
-seasons.hist<- c(2018:2021)
-seasons.curr<-2022
+seasons.hist<- c(2018:2023)
+seasons.curr<-2024
 
 ###Load current season data
 pbp.cur<- nflfastR::load_pbp(seasons.curr)
