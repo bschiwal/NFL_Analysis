@@ -152,7 +152,7 @@ ggplot(teamrecords, aes((opp_cum_rec_lose/opp_cum_rec)*(1-record),(opp_cum_rec_w
 dev.copy(png,"RecordStrengthAdj.png", width = 600, height = 600)
 dev.off()  
 
-##Strength Adjusted Wins
+##Strength Adjusted Wins````
 ggplot(teamrecords, aes(losses_vs_not_winning_team*(1-record),wins_vs_winning_team*record))+
   geom_image(aes(image=team_logo_espn), size = .1)+
   labs(title="Strength Adjusted Wins and Losses",
